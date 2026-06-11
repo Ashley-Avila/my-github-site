@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashley's Website</title>
-    <!-- Importing a bubbly, rounded font from Google Fonts -->
+    <!-- Importing bubbly and extra round fonts from Google Fonts -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com/css2?family=DynaPuff:wght@400..700&family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
     
     <style>
       /* Define colors for Light Mode (Default) */
@@ -31,7 +31,7 @@
       }
 
       body { 
-        /* Font family kept as Fredoka for a bubbly, rounded look */
+        /* General font family kept as Fredoka for a friendly, clean look */
         font-family: 'Fredoka', 'Comic Sans MS', cursive, sans-serif; 
         max-width: 800px;
         margin: 0 auto; 
@@ -42,7 +42,16 @@
         transition: background 0.3s, color 0.3s; 
       }
       
-      h1 { color: var(--heading-primary); font-weight: 600; letter-spacing: 0.5px; }
+      /* Main title updated to use DynaPuff for maximum roundness */
+      h1 { 
+        font-family: 'DynaPuff', cursive, sans-serif;
+        color: var(--heading-primary); 
+        font-size: 2.8rem;
+        font-weight: 700; 
+        letter-spacing: 0.5px; 
+        margin-top: 40px;
+      }
+
       h2 { color: var(--heading-secondary); border-bottom: 3px solid var(--heading-secondary); font-weight: 500; padding-bottom: 4px; }
       p  { line-height: 1.6; font-weight: 400; font-size: 1.1rem; }
       a  { color: var(--link-color); font-weight: 500; }
