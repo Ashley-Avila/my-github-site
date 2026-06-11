@@ -41,9 +41,16 @@
       p  { line-height: 1.6; }
       a  { color: var(--link-color); }
 
+      /* Top navigation bar control container */
+      .controls-container {
+        float: right;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
       /* Styling for the toggle button */
       .theme-toggle-btn {
-        float: right;
         padding: 10px 15px;
         font-size: 1rem;
         cursor: pointer;
@@ -56,11 +63,46 @@
       .theme-toggle-btn:hover {
         opacity: 0.8;
       }
+
+      /* Color wheel picker wrapper styling */
+      .color-picker-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.9rem;
+        font-weight: bold;
+      }
+
+      /* Native color element styling customization */
+      .color-wheel {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 35px;
+        height: 35px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+      }
+      .color-wheel::-webkit-color-swatch {
+        border-radius: 50%;
+        border: 2px solid var(--heading-secondary);
+      }
+      .color-wheel::-moz-color-swatch {
+        border-radius: 50%;
+        border: 2px solid var(--heading-secondary);
+      }
     </style>
   </head>
   <body>
-    <!-- Dark mode button placed right at the top -->
-    <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+    <!-- Container holding both theme toggle and color wheel -->
+    <div class="controls-container">
+      <div class="color-picker-wrapper">
+        <label for="headingColorPicker">🎨 Heading Color:</label>
+        <input type="color" id="headingColorPicker" class="color-wheel" value="#1F4E79" title="Choose heading color">
+      </div>
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+    </div>
 
     <h1>Hi, I'm Ashley!</h1>
  
@@ -78,25 +120,49 @@
       <a href="https://github.com/Ashley-Avila">Ashley-Avila</a>
     </p>
 
-    <!-- JavaScript logic to handle the theme swapping -->
+    <!-- JavaScript logic to handle theme swapping and custom colors -->
     <script>
       const toggleBtn = document.getElementById('themeToggle');
+      const colorPicker = document.getElementById('headingColorPicker');
       
+      // Track default colors to reset when toggling states
+      const defaultLightColor = '#1F4E79';
+      const defaultDarkColor = '#4f93ce';
+
+      // 1. Dynamic Color Picker Logic
+      colorPicker.addEventListener('input', (event) => {
+        const selectedColor = event.target.value;
+        // Inject color directly into CSS Variables
+        document.documentElement.style.setProperty('--heading-primary', selectedColor);
+        document.documentElement.style.setProperty('--heading-secondary', selectedColor);
+      });
+
+      // 2. Light / Dark Theme Switching Logic
       toggleBtn.addEventListener('click', () => {
-        // Check current state
         const currentTheme = document.documentElement.getAttribute('data-theme');
         
         if (currentTheme === 'dark') {
           // Switch to Light Mode
           document.documentElement.removeAttribute('data-theme');
           toggleBtn.innerHTML = '🌙 Dark Mode';
+          
+          // Reset styling variables and assign the light mode color to the wheel
+          document.documentElement.style.removeProperty('--heading-primary');
+          document.documentElement.style.removeProperty('--heading-secondary');
+          colorPicker.value = defaultLightColor;
         } else {
           // Switch to Dark Mode
           document.documentElement.setAttribute('data-theme', 'dark');
           toggleBtn.innerHTML = '☀️ Light Mode';
+          
+          // Reset styling variables and assign the dark mode color to the wheel
+          document.documentElement.style.removeProperty('--heading-primary');
+          document.documentElement.style.removeProperty('--heading-secondary');
+          colorPicker.value = defaultDarkColor;
         }
       });
     </script>
   </body>
 </html>
+
 
