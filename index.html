@@ -1,49 +1,67 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashley's Website</title>
     <!-- Importing bubbly and extra round fonts from Google Fonts -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=DynaPuff:wght@400..700&family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
     
     <style>
       /* Define colors for Light Mode (Default) */
       :root {
-        --background-color: #E6F2FF; /* Soft, pastel light blue background */
-        --card-background: #ffffff;   /* Clean white background for cards */
-        --text-color: #1A365D;       /* Dark blue text for great readability */
-        --heading-primary: #004080;   /* Deep blue heading */
-        --heading-secondary: #0066CC; /* Bright blue secondary heading */
-        --link-color: #D2143A;       /* Vibrant contrast color for links */
-        --card-shadow: rgba(0, 64, 128, 0.08); /* Soft shadow for app depth */
+        --background-color: #E0F2FE; /* Bright, clear sky blue background */
+        --text-color: #0F172A;       /* Deep slate for clean readability */
+        --heading-primary: #1E40AF;   /* Royal blue main heading */
+        --link-color: #10B981;       /* Vibrant emerald green link for high pop */
+        --card-shadow: rgba(30, 64, 175, 0.15); /* Soft blue shadow */
+        
+        /* Distinct colorful blue shades for each section card */
+        --card-about: linear-gradient(135deg, #EFF6FF, #DBEAFE);   /* Soft baby blue */
+        --card-interests: linear-gradient(135deg, #ECFDF5, #D1FAE5); /* Fresh minty teal-blue */
+        --card-goals: linear-gradient(135deg, #F5F3FF, #EDE9FE);     /* Sweet periwinkle blue */
+        --card-github: linear-gradient(135deg, #E0F2FE, #BAE6FD);    /* Bright electric ice blue */
+        
+        /* Inner text colors for light mode card headings */
+        --h2-about: #2563EB;
+        --h2-interests: #059669;
+        --h2-goals: #7C3AED;
+        --h2-github: #0284C7;
       }
 
       /* Define colors for Dark Mode */
       [data-theme="dark"] {
-        --background-color: #0B192C; /* Deep, rich navy blue background */
-        --card-background: #1E3E62;  /* Lighter navy for cards/elements */
-        --text-color: #E2F1E7;       /* Soft off-white text for easy reading */
-        --heading-primary: #60A5FA;   /* Bright pastel blue heading */
-        --heading-secondary: #93C5FD; /* Lighter pastel blue secondary heading */
-        --link-color: #F87171;       /* Coral/pink accent color for links */
-        --card-shadow: rgba(0, 0, 0, 0.3); /* Darker shadow for high contrast */
+        --background-color: #030712; /* Deep space black-blue */
+        --text-color: #F8FAFC;       /* Crisp white-blue text */
+        --heading-primary: #38BDF8;   /* Glowing neon cyan heading */
+        --link-color: #F472B6;       /* Bright pink accent for links */
+        --card-shadow: rgba(0, 0, 0, 0.5); /* Strong shadow for depth */
+        
+        /* Rich, glowing dark blue gradients for each section card */
+        --card-about: linear-gradient(135deg, #1E3A8A, #172554);     /* Deep ocean navy */
+        --card-interests: linear-gradient(135deg, #065F46, #022C22); /* Dark teal seafoam */
+        --card-goals: linear-gradient(135deg, #5B21B6, #2E1065);     /* Deep cosmic indigo blue */
+        --card-github: linear-gradient(135deg, #075985, #0C4A6E);    /* Midnight electric blue */
+        
+        /* Inner text colors for dark mode card headings */
+        --h2-about: #60A5FA;
+        --h2-interests: #34D399;
+        --h2-goals: #A78BFA;
+        --h2-github: #38BDF8;
       }
 
       body { 
-        /* General font family kept as Fredoka for a friendly, clean look */
         font-family: 'Fredoka', 'Comic Sans MS', cursive, sans-serif; 
         max-width: 800px;
         margin: 0 auto; 
         padding: 20px; 
         background: var(--background-color); 
         color: var(--text-color);
-        /* Smooth transition when flipping between modes */
         transition: background 0.3s, color 0.3s; 
       }
 
-      /* Header container to align title and theme switch nicely */
       header {
         display: flex;
         justify-content: space-between;
@@ -52,7 +70,6 @@
         margin-bottom: 30px;
       }
       
-      /* Main title updated to use DynaPuff for maximum roundness */
       h1 { 
         font-family: 'DynaPuff', cursive, sans-serif;
         color: var(--heading-primary); 
@@ -60,81 +77,100 @@
         font-weight: 700; 
         letter-spacing: 0.5px; 
         margin: 0;
+        text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
+      }
+      
+      [data-theme="dark"] h1 {
+        text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
       }
 
-      /* Main container holding your application pieces */
       main {
         display: flex;
         flex-direction: column;
-        gap: 20px; /* Even spacing between your separate sections */
+        gap: 20px; 
       }
 
       /* Reusable container style for card-based app layout */
       .app-section {
-        background-color: var(--card-background);
         padding: 25px;
-        border-radius: 20px;
-        box-shadow: 0 4px 15px var(--card-shadow);
-        transition: background-color 0.3s, box-shadow 0.3s;
+        border-radius: 24px; /* Slightly rounder edges for a friendlier feel */
+        box-shadow: 0 8px 20px var(--card-shadow);
+        transition: transform 0.2s, box-shadow 0.3s, background 0.3s;
+      }
+      
+      .app-section:hover {
+        transform: translateY(-3px); /* Subtle floating animation */
       }
 
+      /* Assigning the specific dynamic blue gradients to each unique card */
+      .section-about { background: var(--card-about); }
+      .section-interests { background: var(--card-interests); }
+      .section-goals { background: var(--card-goals); }
+      .section-github { background: var(--card-github); }
+
+      /* Dynamic coloring for each individual section heading */
+      .section-about h2 { color: var(--h2-about); border-bottom-color: var(--h2-about); }
+      .section-interests h2 { color: var(--h2-interests); border-bottom-color: var(--h2-interests); }
+      .section-goals h2 { color: var(--h2-goals); border-bottom-color: var(--h2-goals); }
+      .section-github h2 { color: var(--h2-github); border-bottom-color: var(--h2-github); }
+
       h2 { 
-        color: var(--heading-secondary); 
-        border-bottom: 3px solid var(--heading-secondary); 
-        font-weight: 500; 
-        padding-bottom: 4px; 
-        margin-top: 0; /* Keeps layout tight inside the section boxes */
+        border-bottom: 3px solid; 
+        font-weight: 600; 
+        padding-bottom: 6px; 
+        margin-top: 0; 
+        font-size: 1.5rem;
       }
       
       p  { line-height: 1.6; font-weight: 400; font-size: 1.1rem; margin-bottom: 0; }
-      a  { color: var(--link-color); font-weight: 500; text-decoration: none; }
-      a:hover { text-decoration: underline; }
+      a  { color: var(--link-color); font-weight: 600; text-decoration: none; border-bottom: 2px dashed var(--link-color); }
+      a:hover { filter: brightness(1.2); }
 
       /* Styling for the toggle button */
       .theme-toggle-btn {
-        padding: 10px 15px;
+        padding: 12px 20px;
         font-family: 'Fredoka', sans-serif;
         font-size: 1rem;
-        font-weight: 500;
+        font-weight: 600;
         cursor: pointer;
-        background-color: var(--card-background);
-        color: var(--text-color);
-        border: 2px solid var(--heading-secondary);
-        border-radius: 20px;
+        background-color: var(--heading-primary);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        box-shadow: 0 4px 10px var(--card-shadow);
         transition: all 0.3s;
       }
       .theme-toggle-btn:hover {
-        opacity: 0.8;
-        transform: scale(1.05); /* Slight pop effect on hover */
+        opacity: 0.9;
+        transform: scale(1.05);
       }
     </style>
   </head>
   <body>
 
-    <!-- Header section with title and button grouped cleanly together -->
     <header>
       <h1>Hi, I'm Ashley!</h1>
       <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">🌙 Dark Mode</button>
     </header>
  
-    <!-- Main wrapper holding the new coherent section boxes -->
     <main>
-      <section class="app-section">
+      <!-- Added distinct class names to target each blue card individually -->
+      <section class="app-section section-about">
         <h2>About Me</h2>
         <p>I am in the 9th grade and I am interested in going into a career that has something to do with engineering.</p>
       </section>
    
-      <section class="app-section">
+      <section class="app-section section-interests">
         <h2>My Interests</h2>
         <p>I really like drawing and crafting when I have free time.</p>
       </section>
    
-      <section class="app-section">
+      <section class="app-section section-goals">
         <h2>My Goals for This Course</h2>
         <p>The goals that I have is to build my skills that are being used and I hope to better my understanding of technology.</p>
       </section>
    
-      <section class="app-section">
+      <section class="app-section section-github">
         <h2>My GitHub</h2>
         <p>Check out my projects: 
           <a href="https://github.com" target="_blank" rel="noopener noreferrer">Ashley-Avila</a>
@@ -142,24 +178,20 @@
       </section>
     </main>
 
-    <!-- JavaScript logic to handle the theme swapping -->
     <script>
       const toggleBtn = document.getElementById('themeToggle');
       
       toggleBtn.addEventListener('click', () => {
-        // Check current state
         const currentTheme = document.documentElement.getAttribute('data-theme');
         
         if (currentTheme === 'dark') {
-          // Switch to Light Mode
           document.documentElement.removeAttribute('data-theme');
           toggleBtn.innerHTML = '🌙 Dark Mode';
         } else {
-          // Switch to Dark Mode
           document.documentElement.setAttribute('data-theme', 'dark');
           toggleBtn.innerHTML = '☀️ Light Mode';
         }
       });
     </script>
   </body>
-</html>.
+</html>
